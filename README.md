@@ -26,6 +26,12 @@ audit log, exportable for an auditor. EU-hosted, DPA available.
 
 Claude Code: `claude mcp add raposa -e RAPOSA_API_KEY=<your key> -- uvx raposa-mcp`
 
+Until the PyPI release lands, install straight from GitHub (identical code):
+
+```bash
+claude mcp add raposa -e RAPOSA_API_KEY=<your key> -- uvx --from git+https://github.com/agentlabbusiness/raposa-mcp raposa-mcp
+```
+
 Get a free sandbox key (100 approvals a month) at https://raposa.group/start/ — it arrives by email in a minute.
 
 ## Tools
