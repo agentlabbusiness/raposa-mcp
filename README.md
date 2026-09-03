@@ -10,6 +10,8 @@ request_human_approval(action, context, risk) -> { approved: true|false, decided
 return `approved: false` — silence is not consent. Every decision is sealed in Raposa's hash-chained
 audit log, exportable for an auditor. EU-hosted, DPA available.
 
+<!-- mcp-name: group.raposa/raposa-mcp -->
+
 ## Install
 
 ```json
@@ -25,12 +27,6 @@ audit log, exportable for an auditor. EU-hosted, DPA available.
 ```
 
 Claude Code: `claude mcp add raposa -e RAPOSA_API_KEY=<your key> -- uvx raposa-mcp`
-
-Until the PyPI release lands, install straight from GitHub (identical code):
-
-```bash
-claude mcp add raposa -e RAPOSA_API_KEY=<your key> -- uvx raposa-mcp
-```
 
 Get a free sandbox key (100 approvals a month) at https://raposa.group/start/ — it arrives by email in a minute.
 

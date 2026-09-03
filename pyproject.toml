@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "raposa-mcp"
-version = "0.1.0"
+version = "0.1.1"
 description = "MCP server for Raposa Aval: give your agent a request_human_approval tool with a signed audit trail."
 readme = "README.md"
 license = "MIT"

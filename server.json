@@ -1,0 +1,32 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "group.raposa/raposa-mcp",
+  "title": "Raposa Aval — human approval",
+  "description": "Human approval for AI agents: a named person approves or rejects, silence is not consent.",
+  "repository": {
+    "url": "https://github.com/agentlabbusiness/raposa-mcp",
+    "source": "github"
+  },
+  "websiteUrl": "https://raposa.group/docs/",
+  "version": "0.1.1",
+  "packages": [
+    {
+      "registryType": "pypi",
+      "identifier": "raposa-mcp",
+      "version": "0.1.1",
+      "runtimeHint": "uvx",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "RAPOSA_API_KEY",
+          "description": "Raposa Aval API key (free sandbox key at https://raposa.group/start/)",
+          "isRequired": true,
+          "isSecret": true,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}
