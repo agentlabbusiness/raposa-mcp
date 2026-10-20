@@ -25,6 +25,13 @@
           "isRequired": true,
           "isSecret": true,
           "format": "string"
+        },
+        {
+          "name": "RAPOSA_API_BASE",
+          "description": "Override of the Raposa Aval API base URL (default https://dcescrypt.com/api). Optional; for isolated testing only.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string"
         }
       ]
     }
