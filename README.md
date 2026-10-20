@@ -4,6 +4,8 @@
 
 An MCP server that gives your agent one honest tool: **ask a human**.
 
+Raposa Aval is a DC ESCRYPT product — https://raposa.group.
+
 ```
 request_human_approval(action, context, risk) -> { approved: true|false, decided_by, ... }
 ```
@@ -14,7 +16,15 @@ audit log, exportable for an auditor. EU-hosted, DPA available.
 
 <!-- mcp-name: group.raposa/raposa-mcp -->
 
+## Getting a key
+
+Register a free sandbox (100 approvals a month) at https://raposa.group/start/. You receive a
+**one-time claim link by email, valid for 24 hours**: opening it reveals your API key once, and
+the link cannot be used again. The key only travels through that link — never in chat tickets.
+
 ## Install
+
+### Direct: uvx (works today)
 
 ```json
 {
@@ -28,9 +38,25 @@ audit log, exportable for an auditor. EU-hosted, DPA available.
 }
 ```
 
-Claude Code: `claude mcp add raposa -e RAPOSA_API_KEY=<your key> -- uvx raposa-mcp`
+Claude Code, without pasting the key on the command line:
 
-Get a free sandbox key (100 approvals a month) at https://raposa.group/start/ — it arrives by email in a minute.
+```bash
+export RAPOSA_API_KEY   # keep it in your environment (a secret manager is fine), never in history
+claude mcp add raposa -e RAPOSA_API_KEY='${RAPOSA_API_KEY}' -- uvx raposa-mcp
+claude mcp get raposa   # shows the ${...} reference, not the secret
+```
+
+Claude Code stores the `${RAPOSA_API_KEY}` reference and expands it from your environment when the
+server starts — the key itself never lands in the config file or the shell history.
+
+### MCP Rush gateway (published; buyer install pending marketplace fix)
+
+The same server is hosted on MCP Rush as
+[darius-ceponas/raposa-aval-human-approval-mcp](https://mcprush.com/darius-ceponas/raposa-aval-human-approval-mcp),
+release 0.1.1, scanned and verified (trust score 96/100). The gateway serves it and refuses calls
+without a buyer token. Buyer installs are blocked on the marketplace side until its Access page
+returns — reported to MCP Rush support as case `p_4785` on 2026-10-20 — so until then the direct
+`uvx` install above is the supported way; no gateway end-to-end claim is made here.
 
 ## Tools
 
@@ -55,4 +81,5 @@ the decision. Docs: https://raposa.group/docs/#approvers
 pip install -e ".[test]" && pytest -q
 ```
 
-MIT · DC ESCRYPT SL · contact@raposa.group
+Raposa Aval — a DC ESCRYPT product · https://raposa.group · contact@raposa.group
+Legal: MIT license · © DC ESCRYPT SL
