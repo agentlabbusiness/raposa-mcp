@@ -7,7 +7,7 @@ It gives an agent one honest capability: before a high-stakes action runs, a nam
 must explicitly approve it. The API is served from EU infrastructure; approvals are sealed
 in a hash-chained audit log that can be exported for an auditor.
 
-[http://dcescrypt.com](https://dcescrypt.com) · [Documentation](https://raposa.group/docs/) · [Get a sandbox key](https://raposa.group/start/)
+https://dcescrypt.com · [Documentation](https://raposa.group/docs/) · [Get a sandbox key](https://raposa.group/start/)
 
 <!-- mcp-name: group.raposa/raposa-mcp -->
 
@@ -57,17 +57,20 @@ Agent ──tool call──▶ MCP server (raposa-mcp) ──HTTPS, Bearer RAPOS
 2. An e-mail titled **“Raposa — your sandbox key”** arrives with a **one-time claim
    link, valid 24 hours**. The link shows the key once and cannot be reused; an expired
    or used link refuses with `410 gone`.
-3. Put the key into the MCP server’s environment (below). If someone sees the link value
-   but not the key, nothing was disclosed — the link reveals it only to the person who
-   opens it.
+3. The claim link is itself the credential: whoever opens it first within 24 h owns the
+   key. Treat that mail as a secret — do not forward it or paste the link into tickets
+   and chats. If the link may have leaked before you opened it, write to
+   contact@raposa.group: an unclaimed link self-expires in 24 h and a claimed key can be
+   revoked and reissued from the account page or by support.
+4. Put the key into the MCP server’s environment (below).
 
 No production data is needed for the sandbox; the same flow issues paid-plan keys automatically
 after checkout.
 
 ## 4 · Install (secure, step by step)
 
-The server is a stdio MCP server, one command: `uvx raposa-mcp` (pin `raposa-mcp==0.1.1` to
-freeze the published release).
+The server is a stdio MCP server, one command: `uvx raposa-mcp` (pin `raposa-mcp==0.1.2` to
+freeze a published release).
 
 ### 4.1 The key never travels through a command line
 
@@ -177,7 +180,7 @@ stays open until its TTL: decide late via your console or `get_approval` later.
 
 ## 6 · Worked examples
 
-Real outputs (sandbox, `uvx raposa-mcp==0.1.1`):
+Real outputs (sandbox, `uvx raposa-mcp==0.1.2`):
 
 create_approval → returns immediately:
 
@@ -273,12 +276,20 @@ the supported way; this README makes no gateway end-to-end claim.
 
 ## 10 · Development
 
+This repository — the MCP package itself:
+
 ```bash
 pip install -e ".[test]" && pytest -q
 ```
 
-Tests cover quotas, rotation, tenant isolation, claim links, panel scopes, rate limits,
-webhooks, Stripe, Slack/Telegram channels, operator scopes and the MCP contract itself.
+11 contract tests run against a mocked transport: tools are listed with their schemas;
+approve / reject / timeout / expiry all read back fail-closed; create returns an id without
+waiting; API errors are reported, not swallowed; an unknown risk never reaches the API; a
+missing key is a clear error while the tool listing still works.
+
+The **backend API** (quotas, key rotation, one-time claim links, tenant isolation, panel
+scopes, rate limiting, webhooks, Stripe, Slack/Telegram channels, audit chain) is a separate
+repository with its own suite; these pytest runs do not exercise it.
 
 * Source and issues: https://github.com/agentlabbusiness/raposa-mcp
 * Documentation: https://raposa.group/docs/
