@@ -1,5 +1,5 @@
 # raposa-mcp
-
+[![Raposa Aval — human approval MCP on mcprush](https://mcprush.com/badge/darius-ceponas-raposa-aval-human-approval-mcp/score.svg)](https://mcprush.com/to/darius-ceponas-raposa-aval-human-approval-mcp?ref=badge)
 An MCP server that gives your agent one honest tool: **ask a human**.
 
 ```
